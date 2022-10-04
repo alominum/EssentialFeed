@@ -12,7 +12,6 @@
 		3C3589A128EC61140083400E /* RemoteFeedLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3589A028EC61140083400E /* RemoteFeedLoaderTests.swift */; };
 		3C8F285628EB2EA3004C9B8D /* EssentialFeed.docc in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F285528EB2EA3004C9B8D /* EssentialFeed.docc */; };
 		3C8F285C28EB2EA4004C9B8D /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C8F285128EB2EA3004C9B8D /* EssentialFeed.framework */; };
-		3C8F286128EB2EA4004C9B8D /* EssentialFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C8F286028EB2EA4004C9B8D /* EssentialFeedTests.swift */; };
 		3C8F286228EB2EA4004C9B8D /* EssentialFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = 3C8F285428EB2EA3004C9B8D /* EssentialFeed.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
@@ -34,7 +33,6 @@
 		3C8F285428EB2EA3004C9B8D /* EssentialFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EssentialFeed.h; sourceTree = "<group>"; };
 		3C8F285528EB2EA3004C9B8D /* EssentialFeed.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = EssentialFeed.docc; sourceTree = "<group>"; };
 		3C8F285B28EB2EA4004C9B8D /* EssentialFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EssentialFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C8F286028EB2EA4004C9B8D /* EssentialFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EssentialFeedTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +94,6 @@
 		3C8F285F28EB2EA4004C9B8D /* EssentialFeedTests */ = {
 			isa = PBXGroup;
 			children = (
-				3C8F286028EB2EA4004C9B8D /* EssentialFeedTests.swift */,
 				3C3589A028EC61140083400E /* RemoteFeedLoaderTests.swift */,
 			);
 			path = EssentialFeedTests;
@@ -222,7 +219,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C3589A128EC61140083400E /* RemoteFeedLoaderTests.swift in Sources */,
-				3C8F286128EB2EA4004C9B8D /* EssentialFeedTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
