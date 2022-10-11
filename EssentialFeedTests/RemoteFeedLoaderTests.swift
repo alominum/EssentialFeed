@@ -39,7 +39,7 @@ class RemoteFeedLoaderTests : XCTestCase {
     func test_load_DeliversErrorOnClientsError() {
         let (sut , client) = makeSUT()
         
-        expect(sut, toCompleteWith: .connectivity) {
+        expect(sut, toCompleteWith: .failure(.connectivity)) {
             let clientError = NSError(domain: "Test", code: 0)
             client.complete(with: clientError)
         }
@@ -51,7 +51,7 @@ class RemoteFeedLoaderTests : XCTestCase {
         let samples = [199,201,300,400,500]
         samples.enumerated().forEach { index, code in
             
-            expect(sut, toCompleteWith: .invalidData) {
+            expect(sut, toCompleteWith: .failure(.invalidData)) {
                 client.complete(withStatusCode: code,at: index)
             }
         }
@@ -60,7 +60,7 @@ class RemoteFeedLoaderTests : XCTestCase {
     func test_laod_DeliversErrorOn200ResponseWithInvalidJSON() {
         let (sut , client) = makeSUT()
         
-        expect(sut, toCompleteWith: .invalidData) {
+        expect(sut, toCompleteWith: .failure(.invalidData)) {
             let invalidJSON = Data("invalid json".utf8)
             client.complete(withStatusCode: 200,data: invalidJSON)
         }
@@ -73,14 +73,14 @@ class RemoteFeedLoaderTests : XCTestCase {
         return (sut,client)
     }
     
-    private func expect(_ sut : RemoteFeedLoader,toCompleteWith error: RemoteFeedLoader.Error, when action: @escaping () -> Void, file: StaticString = #filePath, line: UInt = #line) {
-        var capturedErrors = [RemoteFeedLoader.Error]()
+    private func expect(_ sut : RemoteFeedLoader,toCompleteWith result: RemoteFeedLoader.Result, when action: @escaping () -> Void, file: StaticString = #filePath, line: UInt = #line) {
+        var capturedResults = [RemoteFeedLoader.Result]()
         
-        sut.load { capturedErrors.append($0) }
+        sut.load { capturedResults.append($0) }
         
         action()
     
-        XCTAssertEqual(capturedErrors, [error],file: file,line: line)
+        XCTAssertEqual(capturedResults, [result],file: file,line: line)
     }
     
     private class HTTPClientSpy : HTTPClient {
