@@ -15,10 +15,14 @@ class URLSessionHTTPClient {
         self.session = session
     }
     
+    struct UnexpectedResponseError : Error {}
+    
     func get(from url : URL,completion :@escaping (HTTPClientResult)-> Void) {
         session.dataTask(with: url) { _, _, error in
             if let error = error {
                 completion(.failure(error))
+            } else {
+                completion(.failure(UnexpectedResponseError()))
             }
         }.resume()
     }
@@ -69,10 +73,28 @@ final class URLSessionHTTPClientTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
     }
     
+    
+    func test_getFromURL_FailsOnAllNil() {
+        URLProtocolStub.stub(data: nil, response: nil,error: nil)
+        
+        let exp = expectation(description: "Wait for client")
+        
+        makeSUT().get(from: anyURL()) { result in
+            switch result {
+            case .failure:
+                break
+            default:
+                XCTFail("We expected to fail, but got: \(result)")
+            }
+            exp.fulfill()
+        }
+        wait(for: [exp], timeout: 1.0)
+    }
+    
     // MARK: - Helpers
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> URLSessionHTTPClient {
         let sut = URLSessionHTTPClient()
-        trackForMemoryLeak(sut,file: file, line: line)
+        trackMemoryLeak(sut,file: file, line: line)
         return sut
     }
     

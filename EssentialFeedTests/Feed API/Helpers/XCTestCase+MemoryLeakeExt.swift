@@ -8,9 +8,9 @@
 import XCTest
 
 extension XCTestCase {
-    func trackForMemoryLeak(_ instance : AnyObject, file: StaticString = #filePath, line: UInt = #line) {
+    func trackMemoryLeak(_ instance : AnyObject, file: StaticString = #filePath, line: UInt = #line) {
         addTeardownBlock { [weak instance] in
-            XCTAssertNil(instance,"sut needs to be deallocated.",file: file,line: line)
+            XCTAssertNil(instance,"Memory leak happend, sut needs to be deallocated.",file: file,line: line)
         }
     }
 }
