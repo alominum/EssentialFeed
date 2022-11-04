@@ -72,10 +72,13 @@ class EssentialFeedAPITests: XCTestCase {
                  imageURL: URL(string: payload[index]["image"] ?? "no image url")!)
     }
     
-    private func getFeedResult() -> LoadFeedResult? {
+    private func getFeedResult(file: StaticString = #filePath, line: UInt = #line) -> LoadFeedResult? {
         let url = URL(string: urlString)!
         let client = URLSessionHTTPClient()
         let loader = RemoteFeedLoader(url: url, client: client)
+        
+        trackMemoryLeak(client,file: file,line: line)
+        trackMemoryLeak(loader,file: file,line: line)
         
         var capturedResult : LoadFeedResult?
         let exp = expectation(description: "Wait for API")
