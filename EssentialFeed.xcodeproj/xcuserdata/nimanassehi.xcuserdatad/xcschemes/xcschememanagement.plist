@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>EssentialFeedAPITests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>3C64DE0B29153FBC00B03399</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3C8F285028EB2EA3004C9B8D</key>
 		<dict>
 			<key>primary</key>
