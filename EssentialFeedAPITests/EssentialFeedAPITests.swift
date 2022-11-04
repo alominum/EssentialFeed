@@ -11,20 +11,7 @@ import EssentialFeed
 class EssentialFeedAPITests: XCTestCase {
     
     func test_EndToEndTestServerGETFeedResult_MatchesData() {
-        let url = URL(string: urlString)!
-        let client = URLSessionHTTPClient()
-        let loader = RemoteFeedLoader(url: url, client: client)
-        
-        var capturedResult : LoadFeedResult?
-        let exp = expectation(description: "Wait for API")
-        loader.load { result in
-            capturedResult = result
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 5.0)
-        
-        switch capturedResult {
+        switch getFeedResult() {
         case let .success(items):
             XCTAssertEqual(items.count, 8,"Expected 8 items in the API payload.")
             
@@ -84,5 +71,20 @@ class EssentialFeedAPITests: XCTestCase {
                  description: payload[index]["description"],
                  imageURL: URL(string: payload[index]["image"] ?? "no image url")!)
     }
-
+    
+    private func getFeedResult() -> LoadFeedResult? {
+        let url = URL(string: urlString)!
+        let client = URLSessionHTTPClient()
+        let loader = RemoteFeedLoader(url: url, client: client)
+        
+        var capturedResult : LoadFeedResult?
+        let exp = expectation(description: "Wait for API")
+        loader.load { result in
+            capturedResult = result
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 5.0)
+        return capturedResult
+    }
 }
