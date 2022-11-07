@@ -87,7 +87,7 @@ class EssentialFeedAPITests: XCTestCase {
             exp.fulfill()
         }
         
-        wait(for: [exp], timeout: 5.0)
+        wait(for: [exp], timeout: 15.0)
         return capturedResult
     }
 }
